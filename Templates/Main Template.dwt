@@ -9,13 +9,13 @@
     	<meta name="description" content="Fresh coffee, local honey">
 
         <meta property="og:title" content="Honeybee Café | Local Honey">
-		<!-- TemplateEndEditable -->
         <meta property="og:type" content="website">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Young+Serif&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="css/main.css">
+		<!-- TemplateEndEditable -->
 </head>
 
     <body>
