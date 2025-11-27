@@ -69,3 +69,19 @@ const specialDays = document.querySelectorAll('.special-item');
 }
 
 showSpecial(currentDay);
+
+//One details section of menu open at a time
+document.querySelectorAll('#menu .menu-container details').forEach((details) => {
+  details.addEventListener('toggle', function () {
+    if (details.open) {
+      document.querySelectorAll('#menu .menu-container details').forEach((other) => {
+        if (other !== details) other.open = false;
+      });
+      // Scroll to the heading text
+      const heading = document.querySelector('.heading-text');
+      if (heading) {
+        heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+});
