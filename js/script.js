@@ -85,3 +85,17 @@ document.querySelectorAll('#menu .menu-container details').forEach((details) => 
     }
   });
 });
+
+//Form auto-fill variety and size
+document.querySelectorAll('.button[data-honey]').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const honeyData = btn.getAttribute('data-honey'); 
+    const select = document.querySelector('#order-form select[name="variety"]');
+    if (select) {
+      select.value = honeyData;
+      select.dispatchEvent(new Event('change'));
+    }
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  });
+});
