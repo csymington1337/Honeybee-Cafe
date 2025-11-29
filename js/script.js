@@ -180,3 +180,67 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// Mapping for display names
+const honeyDisplayNames = {
+  "wildflower-250": "Wildflower 250g",
+  "wildflower-500": "Wildflower 500g",
+  "clover-250": "Clover 250g",
+  "clover-500": "Clover 500g",
+  "buckwheat-250": "Buckwheat 250g",
+  "buckwheat-500": "Buckwheat 500g",
+  "lavender-250": "Lavender 250g",
+  "lavender-500": "Lavender 500g",
+  "cinnamon-250": "Cinnamon 250g",
+  "cinnamon-500": "Cinnamon 500g"
+};
+
+//Save data for confirmation page
+document.addEventListener('DOMContentLoaded', function() {
+  const orderForm = document.getElementById('order-form');
+  if (orderForm) {
+    orderForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Collect order items
+      const varieties = Array.from(document.querySelectorAll('select[name="variety[]"]')).map(sel => sel.value);
+      const quantities = Array.from(document.querySelectorAll('input[name="quantity[]"]')).map(inp => inp.value);
+
+      // Collect customer info (use correct IDs)
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+
+      // Save to sessionStorage
+      sessionStorage.setItem('orderVarieties', JSON.stringify(varieties));
+      sessionStorage.setItem('orderQuantities', JSON.stringify(quantities));
+      sessionStorage.setItem('customerName', firstName + ' ' + lastName);
+      sessionStorage.setItem('customerEmail', email);
+      sessionStorage.setItem('customerPhone', phone);
+
+      // Redirect to confirmation page
+      window.location.href = 'order-confirmation.html';
+    });
+  }
+
+  // CONFIRMATION PAGE: Display data
+  if (document.getElementById('order-summary')) {
+    document.getElementById('customer-name').textContent = sessionStorage.getItem('customerName') || '';
+    document.getElementById('customer-email').textContent = sessionStorage.getItem('customerEmail') || '';
+    document.getElementById('customer-phone').textContent = sessionStorage.getItem('customerPhone') || '';
+
+    const varieties = JSON.parse(sessionStorage.getItem('orderVarieties') || '[]');
+    const quantities = JSON.parse(sessionStorage.getItem('orderQuantities') || '[]');
+    const summaryList = document.getElementById('order-summary');
+    summaryList.innerHTML = '';
+    for (let i = 0; i < varieties.length; i++) {
+      if (varieties[i]) {
+        const displayName = honeyDisplayNames[varieties[i]] || varieties[i];
+        const li = document.createElement('li');
+        li.textContent = `${displayName} — Quantity: ${quantities[i]}`;
+        summaryList.appendChild(li);
+      }
+    }
+  }
+});
