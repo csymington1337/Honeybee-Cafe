@@ -825,6 +825,15 @@ ul li {
     display: inline-block;
   }
 
+  /* Nav-menu link hover effect */
+#header .nav-links ul a:hover,
+#header .nav-links ul a:focus {
+  background-color: #FAA725;
+  color: #3A1D0B;
+  border-radius: 3px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
   /*heading styles*/
 
   main {
