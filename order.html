@@ -261,23 +261,34 @@
                 <form id="order-form" action="" method="post">
                     <h2>Order Form</h2>
 
-                    <div class="form-group">
-                        <label for="variety">Variety &amp; Size: <span>*</span></label>
-                        <select id="variety" name="variety" required>
-                            <option value="">Select an option</option>
-                            <option value="wildflower-250">Wildflower 250g</option>
+                    <div id="order-items">
+											<div class="order-item">
+												<div class="order-item-row">
+													<label for="variety-1">Variety &amp; Size:</label>
+													<select id="variety-1" name="variety[]">
+														<option value="">Select an option</option>
+														<option value="wildflower-250">Wildflower 250g</option>
 														<option value="wildflower-500">Wildflower 500g</option>
-                            <option value="clover-250">Clover 250g</option>
+														<option value="clover-250">Clover 250g</option>
 														<option value="clover-500">Clover 500g</option>
-                            <option value="buckwheat-250">Buckwheat 250g</option>
+														<option value="buckwheat-250">Buckwheat 250g</option>
 														<option value="buckwheat-500">Buckwheat 500g</option>
-                            <option value="lavender-250">Lavender 250g</option>
+														<option value="lavender-250">Lavender 250g</option>
 														<option value="lavender-500">Lavender 500g</option>
-                            <option value="cinnamon-250">Cinnamon 250g</option>
+														<option value="cinnamon-250">Cinnamon 250g</option>
 														<option value="cinnamon-500">Cinnamon 500g</option>
-                        </select>
-                    </div><!--form-group ends-->
-                    
+													</select>
+												</div>
+												<div class="order-item-row">
+													<label for="quantity-1">Quantity:</label>
+													<input type="number" id="quantity-1" name="quantity[]" min="1" value="1">
+												</div><!--order-item-row ends-->
+											</div><!--order-item ends-->
+										</div><!--order-items ends-->
+										<button type="button" class="button">
+											<span>&#43;</span> Add another item
+										</button>
+																				
                     <div class="form-row">
                         <div class="form-group">
                           <label for="first-name">First Name: <span>*</span>

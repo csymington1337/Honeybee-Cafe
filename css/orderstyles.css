@@ -366,6 +366,52 @@ ul li {
     padding: 3% 0;
 }
 
+#order-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.order-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #FEECE0;
+    border: 2px solid #FAA725;
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.order-item-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.order-item label {
+    color: #3A1D0B;
+    font-weight: 700;
+    min-width: 90px;
+    text-align: left;
+}
+
+.order-item select,
+.order-item input[type="number"] {
+    width: 100%;
+    max-width: 200px;
+    min-width: 120px;
+    box-sizing: border-box;
+    background-color: #FEECE0;
+    color: #3A1D0B;
+    border: 2px solid #FAA725;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 1em;
+}
+
 #order .form-group {
     display: flex;
     flex-direction: row;
@@ -426,7 +472,7 @@ ul li {
 }
 
 #order .button {
-    margin-top: 5%;
+    margin: 5% 0;
 }
 
 /*footer styles*/
@@ -593,6 +639,49 @@ ul li {
     margin-bottom: 5%;
   }
 
+  #order-items {
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .order-item {
+    margin-bottom: 12px;
+    padding: 18px auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-item-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+
+  .order-item label {
+    min-width: 120px;
+    text-align: left;
+    font-size: 1.1em;
+  }
+
+  .order-item select,
+  .order-item input[type="number"] {
+    width: 200px;
+    font-size: 1.1em;
+    margin-bottom: 0;
+  }
+
+  #order-form .form-row {
+    align-content: center;
+  }
+
   #order .form-group {
     display: flex;
     flex-direction: row;
@@ -600,6 +689,7 @@ ul li {
     justify-content: center;
     gap: 12px;
     padding: 3% 0;
+    margin-right: 4%;
   }
 
   #order .form-group label:not([for="newsletter"]) {
@@ -790,6 +880,42 @@ ul li {
   #order h2 {
     padding: 3% 0;
     margin: 0;
+  }
+
+  #order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 3%;
+  }
+
+  .order-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+  }
+
+  .order-item-row {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: row;
+    min-width: 200px;
+    max-width: 320px;
+    margin-bottom: 0;
+  }
+
+  #order .button[type="button"] {
+    margin: 3% 0;
   }
 
   #order-form {

@@ -86,16 +86,97 @@ document.querySelectorAll('#menu .menu-container details').forEach((details) => 
   });
 });
 
-//Form auto-fill variety and size
-document.querySelectorAll('.button[data-honey]').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    const honeyData = btn.getAttribute('data-honey'); 
-    const select = document.querySelector('#order-form select[name="variety"]');
-    if (select) {
-      select.value = honeyData;
-      select.dispatchEvent(new Event('change'));
-    }
-    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+// Utility: Get next available index for new order items
+function getNextOrderIndex() {
+  const items = document.querySelectorAll('#order-items .order-item');
+  return items.length + 1;
+}
+
+// Add a new order item block, optionally pre-selecting variety/size
+function addOrderItem(selectedValue = '') {
+  const index = getNextOrderIndex();
+  const orderItems = document.getElementById('order-items');
+
+  // Create order-item container
+  const itemDiv = document.createElement('div');
+  itemDiv.className = 'order-item';
+
+  // Variety & Size row
+  const varietyRow = document.createElement('div');
+  varietyRow.className = 'order-item-row';
+  const varietyLabel = document.createElement('label');
+  varietyLabel.setAttribute('for', `variety-${index}`);
+  varietyLabel.textContent = 'Variety & Size:';
+  const varietySelect = document.createElement('select');
+  varietySelect.id = `variety-${index}`;
+  varietySelect.name = 'variety[]';
+  varietySelect.innerHTML = `
+    <option value="">Select an option</option>
+    <option value="wildflower-250">Wildflower 250g</option>
+    <option value="wildflower-500">Wildflower 500g</option>
+    <option value="clover-250">Clover 250g</option>
+    <option value="clover-500">Clover 500g</option>
+    <option value="buckwheat-250">Buckwheat 250g</option>
+    <option value="buckwheat-500">Buckwheat 500g</option>
+    <option value="lavender-250">Lavender 250g</option>
+    <option value="lavender-500">Lavender 500g</option>
+    <option value="cinnamon-250">Cinnamon 250g</option>
+    <option value="cinnamon-500">Cinnamon 500g</option>
+  `;
+  if (selectedValue) varietySelect.value = selectedValue;
+  varietyRow.appendChild(varietyLabel);
+  varietyRow.appendChild(varietySelect);
+
+  // Quantity row
+  const quantityRow = document.createElement('div');
+  quantityRow.className = 'order-item-row';
+  const quantityLabel = document.createElement('label');
+  quantityLabel.setAttribute('for', `quantity-${index}`);
+  quantityLabel.textContent = 'Quantity:';
+  const quantityInput = document.createElement('input');
+  quantityInput.type = 'number';
+  quantityInput.id = `quantity-${index}`;
+  quantityInput.name = 'quantity[]';
+  quantityInput.min = '1';
+  quantityInput.value = '1';
+  quantityRow.appendChild(quantityLabel);
+  quantityRow.appendChild(quantityInput);
+
+  // Assemble
+  itemDiv.appendChild(varietyRow);
+  itemDiv.appendChild(quantityRow);
+  orderItems.appendChild(itemDiv);
+}
+
+// "Add another item" button functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Initial setup: If no order-item exists, add one
+  if (!document.querySelector('#order-items .order-item')) {
+    addOrderItem();
+  }
+
+  // Add item button
+  const addBtn = document.querySelector('#order .button[type="button"]');
+  if (addBtn) {
+    addBtn.addEventListener('click', function() {
+      addOrderItem();
+    });
+  }
+
+  // Auto-fill from menu order buttons
+  document.querySelectorAll('.honey-table .button[data-honey]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const selectedValue = btn.getAttribute('data-honey');
+      // Find first empty variety selector
+      const emptySelect = Array.from(document.querySelectorAll('#order-items select[name="variety[]"]'))
+        .find(sel => !sel.value);
+      if (emptySelect) {
+        emptySelect.value = selectedValue;
+      } else {
+        addOrderItem(selectedValue);
+      }
+      document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+    });
   });
 });
