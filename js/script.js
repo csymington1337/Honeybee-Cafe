@@ -244,3 +244,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+
+//Random fact generator
+document.addEventListener('DOMContentLoaded', function() {
+  const facts = [
+    "Honey never spoils — archaeologists have found edible honey in ancient Egyptian tombs.",
+    "A single honeybee visits around 5,000 flowers in one day when gathering nectar.",
+    "Bees communicate by dancing, using the “waggle dance” to show hive-mates where to find flowers.",
+    "It takes about 12 bees their entire lifetimes to make one teaspoon of honey.",
+    "Bees can recognize human faces, a rare ability among insects.",
+    "Raw honey contains natural antioxidants, enzymes, and nutrients that processed honey often loses.",
+    "A healthy hive can produce 60 to 100 pounds of extra honey in a single season.",
+    "Honeybees flap their wings 200 times per second, which creates the humming sound we hear.",
+    "Bees pollinate one-third of all the food crops humans eat, making them essential to our ecosystem.",
+    "Each honey's flavor depends entirely on the flowers the bees visit, which is why different regions produce unique varieties."
+  ];
+
+  function getRandomFact() {
+    return facts[Math.floor(Math.random() * facts.length)];
+  }
+
+  const factText = document.querySelector('.fact-text');
+  const newFactBtn = document.getElementById('new-fact-btn');
+
+  if (factText && newFactBtn) {
+    // Show a random fact on load
+    factText.textContent = getRandomFact();
+
+    // Show a new random fact on button click
+    newFactBtn.addEventListener('click', function() {
+      let newFact;
+      do {
+        newFact = getRandomFact();
+      } while (facts.length > 1 && newFact === factText.textContent);
+      factText.textContent = newFact;
+    });
+  }
+});
